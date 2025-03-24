@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome</title>
+    <script src="https://unpkg.com/css-doodle@0.34.7/css-doodle.min.js"></script>
+    <link rel="stylesheet" href="static/landing.css">
+</head>
+<body>
+    <css-doodle grid="1">
+  :doodle {
+    @size: 300px;
+    @shape: circle;
+    filter: blur(4px);
+    background: radial-gradient(circle, rgba(0, 200, 255, 0.4) 40%, transparent 60%);
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  ::after {
+    content: '';
+    @size: 100%;
+    @shape: circle;
+    background: repeating-conic-gradient(
+      from @r(0turn),
+      rgba(0, 200, 255, 0.8) 0deg 10deg,
+      transparent 10deg 20deg
+    );
+    animation: spin 3s linear infinite, flicker 2s infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.5; }
+  }
+</css-doodle>
+    <script src="static/landing.js"></script>
+</body>
+</html>

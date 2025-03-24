@@ -7,9 +7,21 @@ app = Flask(__name__)
 # Allows for cross-origin with local web server.
 CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5000"}})
 
+@app.route('/bobcat')
+def view1():
+    return render_template('bobcat.html')
+
+@app.route('/eagle')
+def view2():
+    return render_template('eagle.html')
+
+@app.route('/sandpiper')
+def view3():
+    return render_template('sandpiper.html')
+
 @app.route('/')
-def index():
-    return render_template('index.html')
+def landing():
+    return render_template('landing.html')
 
 @app.route('/api/process', methods=['POST'])
 def process():

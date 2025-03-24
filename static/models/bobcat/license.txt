@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bobcat
+* source:	https://sketchfab.com/3d-models/bobcat-c478395f3d5f4effa62224aadf2bb89c
+* author:	Innovation Studio (https://sketchfab.com/cmp_innovation_studio)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bobcat" (https://sketchfab.com/3d-models/bobcat-c478395f3d5f4effa62224aadf2bb89c) by Innovation Studio (https://sketchfab.com/cmp_innovation_studio) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

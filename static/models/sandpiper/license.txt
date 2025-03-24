@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sandpiper specimen
+* source:	https://sketchfab.com/3d-models/sandpiper-specimen-3d176ba478bb492190d5fcc10ef678a5
+* author:	UVic Libraries (https://sketchfab.com/uviclib)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sandpiper specimen" (https://sketchfab.com/3d-models/sandpiper-specimen-3d176ba478bb492190d5fcc10ef678a5) by UVic Libraries (https://sketchfab.com/uviclib) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
