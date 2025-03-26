@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Flask instance & config
+instance/
+*.sqlite3
+
+# node_modules/
+
+# Frontend build artifacts
+dist/
+build/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
