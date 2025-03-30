@@ -7,6 +7,24 @@ body {
   margin: 0;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2s ease;
+  z-index: 10;
+}
+
+.fade-out {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .portal {
   width: 20vw;
   height: 20vw;
@@ -19,7 +37,7 @@ body {
 
 .portal:hover {
   transform: scale(1.1);
-  animation: pulseGlowRed 2s infinite alternate ease-in-out !important;
+  /* animation: pulseGlowRed 2s infinite alternate ease-in-out !important; */
   transition: transform 0.5s ease-in-out;
 }
 
