@@ -19,6 +19,10 @@ def view2():
 def view3():
     return render_template('sandpiper.html')
 
+@app.route('/transition')
+def transit():
+    return render_template('transition.html')
+
 @app.route('/')
 def landing():
     return render_template('landing.html')

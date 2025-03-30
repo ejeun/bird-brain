@@ -1,4 +1,5 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
@@ -23,6 +24,8 @@ loader.load('/static/models/bobcat/scene.gltf', function ( gltf ) {
 } );
 
 camera.position.z = 5;
+
+const controls = new OrbitControls( camera, renderer.domElement );
 
 function animate() {
     requestAnimationFrame(animate);
