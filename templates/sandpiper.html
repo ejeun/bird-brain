@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sandpiper</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
-        }
-    }
-    </script>
-</head>
-<body>
-    <canvas id="three-canvas"></canvas>
-    <script type="module" src="{{ url_for('static', filename='viewsandpiper.js') }}"></script>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<script type="module" src="{{ url_for('static', filename='viewsandpiper.js') }}"></script>
+{% endblock %}
