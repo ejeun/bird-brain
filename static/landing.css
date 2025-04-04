@@ -39,6 +39,7 @@ body {
   transform: scale(1.1);
   /* animation: pulseGlowRed 2s infinite alternate ease-in-out !important; */
   transition: transform 0.5s ease-in-out;
+  cursor: grab;
 }
 
 @keyframes pulseGlow {

@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>interconnection</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        canvas {
-            display: block;
-        }
-    </style>
-</head>
-<body>
+{% extends "components/stepbase.html" %}
+{% block content %}
     <canvas id="visualization"></canvas>
 
-    <script>
+    <script defer>
+        const text = "First we will analyze the life processes that match your signature together.";
+        document.addEventListener("DOMContentLoaded", () => { 
+            window.captions.show(text);
+        });
+
         const canvas = document.getElementById('visualization');
         const ctx = canvas.getContext('2d');
         const nodeCount = 150;
@@ -115,5 +99,4 @@
         // Handle window resize
         window.addEventListener('resize', setCanvasSize);
     </script>
-</body>
-</html>
+{% endblock %}

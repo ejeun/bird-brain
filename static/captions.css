@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Ubuntu Mono';
+    src: url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('/static/fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('/static/fonts/Courier_Prime/CourierPrime-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+#caption-container {
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    pointer-events: none; /* allows clicking through when hidden */
+}
+
+#caption-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    border-radius: 5px;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#caption-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#caption-text {
+    color: white;
+    font-family: 'Nunito', 'Courier Prime', monospace;
+    font-size: 1.2em;
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+} 
