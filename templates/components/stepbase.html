@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>in progess</title>
+    <title>in progress</title>
     <style>
         body {
             margin: 0;
@@ -23,6 +23,7 @@
     <script src="static/captions.js" defer></script>
 </head>
 <body>
+    {% include 'components/passcode.html' %}
     {% block content %}{% endblock %}
 </body>
 </html>
