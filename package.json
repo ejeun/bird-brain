@@ -1,0 +1,16 @@
+{
+  "name": "keki.world",
+  "version": "1.0.0",
+  "description": "Interactive web experience",
+  "scripts": {
+    "lint": "eslint static/js/**/*.js",
+    "lint:fix": "eslint static/js/**/*.js --fix",
+    "format": "prettier-eslint --write static/js/**/*.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
+    "prettier-eslint-cli": "^8.0.1"
+  }
+}

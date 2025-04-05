@@ -27,10 +27,10 @@
     left: 0;
     right: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     z-index: 1000;
-    pointer-events: none; /* allows clicking through when hidden */
+    pointer-events: none;
 }
 
 #caption-box {
@@ -54,5 +54,38 @@
     font-size: 1.2em;
     margin: 0;
     text-align: center;
-    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.word-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.word.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#caption-controls {
+    margin-top: 10px;
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    #caption-box {
+        font-size: 1rem;
+        padding: 10px 15px;
+        max-width: 90%;
+    }
 } 
