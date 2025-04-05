@@ -7,43 +7,43 @@ app = Flask(__name__)
 # Allows for cross-origin with local web server.
 CORS(app, resources={r"/api/*": {"origins": "http://127.0.0.1:5000"}})
 
-@app.route('/bobcat')
+
+@app.route("/bobcat")
 def view1():
-    return render_template('bobcat.html')
+    return render_template("bobcat.html")
 
-@app.route('/eagle')
+
+@app.route("/eagle")
 def view2():
-    return render_template('eagle.html')
+    return render_template("eagle.html")
 
-@app.route('/sandpiper')
+
+@app.route("/sandpiper")
 def view3():
-    return render_template('sandpiper.html')
+    return render_template("sandpiper.html")
 
-@app.route('/step1')
-def step1():
-    return render_template('step1.html')
 
-@app.route('/step2')
-def step2():
-    return render_template('step2.html')   
-
-@app.route('/step3')
-def step3():
-    return render_template('step3.html')
-
-@app.route('/step4')
-def step4():
-    return render_template('step4.html')
-
-@app.route('/')
-def landing():
-    return render_template('landing.html')
-
-@app.route('/api/process', methods=['POST'])
+@app.route("/process")
 def process():
-    data = request.json
-    response = {"message": f"Received: {data.get('input')}"}
-    return jsonify(response)
+    return render_template("process.html")
 
-if __name__ == '__main__':
+
+@app.route("/step4")
+def step4():
+    return render_template("step4.html")
+
+
+@app.route("/")
+def landing():
+    return render_template("landing.html")
+
+
+# @app.route("/api/process", methods=["POST"])
+# def process():
+#     data = request.json
+#     response = {"message": f"Received: {data.get('input')}"}
+#     return jsonify(response)
+
+
+if __name__ == "__main__":
     app.run(debug=True)

@@ -10,12 +10,16 @@ venv/
 instance/
 *.sqlite3
 
-# node_modules/
+node_modules/
 
 # Frontend build artifacts
 dist/
 build/
 *.log
+
+# IDEs and editors
+.idea/
+.vscode/
 
 # System files
 .DS_Store

@@ -4,7 +4,7 @@ const portal = document.querySelector('.portal');
 const overlay = document.querySelector('.overlay');
 
 // Show initial caption
-window.captions.show("[Closed captioning sponsored by the Keki Fund]");
+window.captions.show("[Closed captioning sponsored by the Keki Fund]", false);
 
 // Show a caption for 5 seconds
 window.captions.show("Are you ready to move on?");
@@ -29,7 +29,7 @@ portal.addEventListener('click', () => {
 clicks++;
 if (clicks === 1) {
     window.captions.show("Welcome to the Decompositor.");
-    window.captions.show("Your identity synchronization and biometric access have been confirmed.");
+    window.captions.show("Your biometric access have been confirmed.");
 }
 if (clicks === 2) {
     if (window.captions.waitingForClick) {
@@ -57,7 +57,7 @@ if (clicks === 4) {
     window.captions.show("Let's dissolve you.");
     overlay.classList.add('fade-out');
     setTimeout(() => {
-        window.location.href = '/step1';
+        window.location.href = '/process';
     }, 3000);
     }
 });

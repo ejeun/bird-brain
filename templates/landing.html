@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>welcome</title>
-    <link rel="stylesheet" href="static/landing.css">
-    <script src="static/captions.js" defer></script>
-</head>
-<body>
-  <div class="overlay"></div>
-  <div id="portalContainer">
-    <div class="portal"></div>
-  </div>
-  <script src="static/landing.js" defer></script>
-</body>
-</html>
+{% extends "components/stepbase.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/landing.css">
+<div class="overlay"></div>
+<div id="portalContainer">
+   <div class="portal"></div>
+</div>
+<script src="static/js/landing.js" defer></script>
+{% endblock %}
