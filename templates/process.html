@@ -3,34 +3,15 @@
     <link rel="stylesheet" href="/static/css/process.css">
     <script type="module" src="/static/js/process.js" defer></script>
 
-    <div class="visualization-container">
+    <div class="container">
         <canvas id="visualization"></canvas>
-    </div>
-    
-    <div class="collage-container" id="collage"></div>
 
-    <form class="name-form" id="nameForm">
-        <h2>Enter your name</h2>
-        <input type="text" id="nameInput" placeholder="Your legal name" required>
-        <button type="submit">Continue</button>
-    </form>
-    
-    <style>
-        .visualization-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-        }
-        
-        #visualization {
-            max-width: 100%;
-            max-height: 100%;
-        }
-    </style>
+        <div class="collage-container" id="collage"></div>
+        <form class="name-form" id="nameForm">
+            <h2>Enter your name</h2>
+            <input type="text" id="nameInput" placeholder="Your next name" required>
+            <button type="submit">Continue</button>
+        </form>
+
+    </div>
 {% endblock %}

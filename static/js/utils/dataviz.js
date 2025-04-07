@@ -210,5 +210,4 @@ export class DataVisualizer {
     this.ctx.globalAlpha = 1;
     return particles;
   }
-
 }
