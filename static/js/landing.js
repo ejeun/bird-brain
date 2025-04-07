@@ -57,7 +57,7 @@ if (clicks === 4) {
     window.captions.show("Let's dissolve you.");
     overlay.classList.add('fade-out');
     setTimeout(() => {
-        window.location.href = '/process';
+        window.location.href = '/intake';
     }, 3000);
     }
 });
