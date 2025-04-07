@@ -8,6 +8,7 @@
 export const LINES = [
     "Touch the images that spark the most curiosity in you.",
     "Next, please enter your legal name. You may re-use your existing name.",
+    "Thanks [name].",
     "Standard process is letting the mycelium work with your remains.",
     "The interactions model the sparks between the neurons.",
     "You've opted into the alpha release and we will be using the flight trajectories of these birds.",
@@ -49,7 +50,9 @@ export const COLLAGE_IMAGES = [
 export const ANIMATION_TIMING = {
     CANVAS_FADE_OUT_DELAY: 4000,
     CANVAS_FADE_OUT_DURATION: 1000,
-    COLLAGE_FADE_IN_DELAY: 100
+    COLLAGE_FADE_IN_DELAY: 1000,
+    COLLAGE_FADE_OUT_DELAY: 3000,
+    FORM_DELAY: 3000,
 };
 
 // Canvas configuration
