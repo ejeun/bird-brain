@@ -28,6 +28,11 @@ def process():
     return render_template("process.html")
 
 
+@app.route("/step3")
+def step3():
+    return render_template("step3.html")
+
+
 @app.route("/step4")
 def step4():
     return render_template("step4.html")
@@ -36,6 +41,11 @@ def step4():
 @app.route("/")
 def landing():
     return render_template("landing.html")
+
+
+@app.route("/intake")
+def intake():
+    return render_template("intake.html")
 
 
 # @app.route("/api/process", methods=["POST"])
