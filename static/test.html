@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mycelium Network Animation</title>
+    <style>
+      body { margin: 0; overflow: hidden; background: #000; }
+      canvas { display: block; }
+    </style>
+  </head>
+  <body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
+                }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+      let scene = new THREE.Scene();
+      let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 100;
+
+      let renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Controls
+      const controls = new OrbitControls(camera, renderer.domElement);
+
+      // Material for network lines
+      const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.3 });
+
+      // Create random network points
+      const points = [];
+      for (let i = 0; i < 100; i++) {
+        points.push(new THREE.Vector3(
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200
+        ));
+      }
+
+      // Connect lines between random pairs of points
+      for (let i = 0; i < 100; i++) {
+        let geometry = new THREE.BufferGeometry().setFromPoints([
+          points[i],
+          points[Math.floor(Math.random() * points.length)]
+        ]);
+        let line = new THREE.Line(geometry, lineMaterial);
+        scene.add(line);
+      }
+
+      // Glowing moving particles ("nutrients")
+      const nutrientGeometry = new THREE.SphereGeometry(1.2, 12, 12);
+      const nutrientMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff66 });
+      const nutrients = [];
+
+      for (let i = 0; i < 50; i++) {
+        let nutrient = new THREE.Mesh(nutrientGeometry, nutrientMaterial);
+        nutrient.userData.path = [
+          points[Math.floor(Math.random() * points.length)],
+          points[Math.floor(Math.random() * points.length)]
+        ];
+        nutrient.userData.t = 0;
+        scene.add(nutrient);
+        nutrients.push(nutrient);
+      }
+
+      // Animate
+      function animate() {
+        requestAnimationFrame(animate);
+
+        nutrients.forEach(nutrient => {
+          nutrient.userData.t += 0.01;
+          if (nutrient.userData.t > 1) {
+            nutrient.userData.t = 0;
+            nutrient.userData.path = [
+              points[Math.floor(Math.random() * points.length)],
+              points[Math.floor(Math.random() * points.length)]
+            ];
+          }
+
+          let p0 = nutrient.userData.path[0];
+          let p1 = nutrient.userData.path[1];
+          nutrient.position.lerpVectors(p0, p1, nutrient.userData.t);
+        });
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
