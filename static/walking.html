@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Walking Meditation</title>
+    <link rel="stylesheet" href="/static/css/walking.css" />
+    <style>
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.3);
+        transform: scale(0);
+        animation: ripple 1s linear;
+        pointer-events: none;
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <img id="displayImage" src="" alt="Display Image" />
+    </div>
+    <script>
+      const images = ['/static/images/left.png', '/static/images/right.png'];
+      const displayImage = document.getElementById('displayImage');
+
+      let currentImageIndex = 0;
+      let busy = false;
+      let cycleIndex = 0;
+      let currentPosition = 0;
+      const path = [
+        // 'Backquote',
+        'Digit1',
+        'KeyQ',
+        'Digit2',
+        'KeyW',
+        'Digit3',
+        'KeyE',
+        'Digit4',
+        'KeyR',
+        'Digit5',
+        'KeyT',
+        'Digit6',
+        'KeyY',
+        'Digit7',
+        'KeyU',
+        'Digit8',
+        'KeyI',
+        'Digit9',
+        'KeyO',
+        'Digit0',
+        'KeyP',
+        'Minus',
+        'BracketLeft',
+        'Equal',
+        'BracketRight',
+        // 'Backslash',
+      ];
+      const inCycle = (keycode) => {
+        if (path[cycleIndex] === keycode) {
+          cycleIndex++;
+          if (cycleIndex >= path.length) {
+            cycleIndex = 0;
+          }
+          return true;
+        }
+        return false;
+      };
+      document.addEventListener('keydown', (event) => {
+        console.log(`
+                Key: ${event.key}<br>
+                Code: ${event.code}<br>
+                KeyCode: ${event.keyCode}
+            `);
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        ripple.style.width = '20px';
+        ripple.style.height = '20px';
+        ripple.style.left = `${currentPosition + 60}px`; // Position near the image
+        ripple.style.top = '20px';
+        document.body.appendChild(ripple);
+
+        // Remove ripple after animation
+        setTimeout(() => {
+          ripple.remove();
+        }, 1000);
+
+        if (busy) {
+          return;
+        }
+
+        // Prevent default behavior for space and arrow keys
+        if (
+          ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(
+            event.code,
+          )
+        ) {
+          event.preventDefault();
+        }
+
+        if (inCycle(event.code)) {
+          busy = true;
+
+          // Cycle through images
+          displayImage.src = images[currentImageIndex];
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+
+          // Update position
+          currentPosition += 30;
+          displayImage.style.left = `${currentPosition}px`;
+
+          // Add fade-in class
+          displayImage.classList.add('fade-in');
+
+          // Remove fade-in class after animation completes
+          setTimeout(() => {
+            displayImage.classList.remove('fade-in');
+            setTimeout(() => {
+              busy = false;
+            }, 300);
+          }, 800);
+        }
+      });
+    </script>
+  </body>
+</html>

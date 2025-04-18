@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>3x3 Cylindrical Scroll Grid</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+    <script src="https://unpkg.com/three@0.157.0/build/three.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      camera.position.z = 12;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const loader = new THREE.TextureLoader();
+      const gridSize = 3;
+      const radius = 9;
+      const thetaStep = Math.PI / 6; // spacing between columns
+      const vSpacing = 2.5;
+
+      let scroll = 0;
+      let images = [];
+      for (let i = 0; i < 100; i++) {
+        images.push(`https://picsum.photos/seed/${i + 1}/400/400`);
+      }
+
+      let tiles = [];
+
+      function createTile(i, j, index) {
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const texture = loader.load(images[index % images.length]);
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const mesh = new THREE.Mesh(geometry, material);
+
+        mesh.userData = { col: i, row: j, index };
+        group.add(mesh);
+        tiles.push(mesh);
+      }
+
+      let baseIndex = 0;
+
+      function updateTiles() {
+        tiles.forEach((tile, idx) => {
+          const i = idx % gridSize;
+          const j = Math.floor(idx / gridSize);
+
+          const angleOffset = scroll;
+          const angle = (i - 1) * thetaStep + angleOffset;
+          const y = (1 - j) * vSpacing;
+
+          const r = j === 2 ? radius * 1.15 : radius;
+
+          const x = r * Math.sin(angle);
+          const z = r * Math.cos(angle) - radius;
+
+          tile.position.set(x, y, z);
+          tile.lookAt(0, y, 0);
+
+          // Calculate which image to show based on scroll
+          const colOffset = Math.round(scroll / thetaStep);
+          const imageIndex =
+            (baseIndex + colOffset + i + j * gridSize) % images.length;
+
+          const currentIndex = tile.userData.index;
+          if (currentIndex !== imageIndex) {
+            tile.material.map = loader.load(images[imageIndex]);
+            tile.userData.index = imageIndex;
+          }
+        });
+      }
+
+      for (let j = 0; j < gridSize; j++) {
+        for (let i = 0; i < gridSize; i++) {
+          const index = i + j * gridSize;
+          createTile(i, j, index);
+        }
+      }
+
+      updateTiles();
+
+      window.addEventListener('wheel', (e) => {
+        scroll += e.deltaY * 0.001;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        updateTiles();
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

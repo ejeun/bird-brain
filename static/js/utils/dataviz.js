@@ -87,14 +87,14 @@ export class DataVisualizer {
           this.ctx.beginPath();
           this.ctx.moveTo(node.x, node.y);
           this.ctx.lineTo(other.x, other.y);
-          this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
+          this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.4})`;
           this.ctx.stroke();
         }
       }
     }
 
     // Draw nodes
-    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     nodes.forEach((node) => {
       this.ctx.beginPath();
       this.ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
