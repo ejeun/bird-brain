@@ -2,7 +2,6 @@ export const mainInnerHTML = `
   <article class="one" style="">
     <img src="/static/images/beach.png" alt="Beach" />
     <div class="description">
-      <p class="author">28° 48' 32.76'' N 96° 6' 28.8'' W</p>
     </div>
   </article>
   <article class="two">
@@ -33,6 +32,18 @@ export const mainInnerHTML = `
     <p class="author"></p>
   </article>
   <article class="nine">
+    <img src="/static/images/ocean.jpg" alt="Ocean" />
+    <p class="author"></p>
+  </article>
+  <article class="ten">
+    <img src="/static/images/ocean.jpg" alt="Ocean" />
+    <p class="author"></p>
+  </article>
+  <article class="eleven">
+    <img src="/static/images/ocean.jpg" alt="Ocean" />
+    <p class="author"></p>
+  </article>
+  <article class="twelve">
     <img src="/static/images/ocean.jpg" alt="Ocean" />
     <p class="author"></p>
   </article>

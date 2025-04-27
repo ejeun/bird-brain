@@ -4,7 +4,11 @@ const pieces = [];
 
 function createMainSection() {
   const main = document.createElement('main');
+  const root = document.querySelector(':root');
+  const body = document.querySelector('body');
+  body.style.height = '15000px';
   main.innerHTML = mainInnerHTML;
+  root.style.setProperty('--background', 'rgb(136, 161, 182)');
   return main;
 }
 
@@ -42,11 +46,26 @@ function getAverageColor(img) {
 function handleScroll() {
   if (window.innerWidth > 800) {
     const root = document.querySelector(':root');
+    const currentScroll = window.scrollY;
+
+    // Block upward scrolling
+    if (currentScroll < window.lastScrollTop) {
+      window.scrollTo(0, window.lastScrollTop);
+      return;
+    }
+
+    if (currentScroll >= 10000) {
+      window.scrollTo(0, 0);
+    }
+
+    // Update last scroll position
+    window.lastScrollTop = currentScroll;
+
     root.style.setProperty('--scroll', Math.floor(window.scrollY) + 'px');
 
     root.style.setProperty(
       '--visible',
-      (Math.floor(window.scrollY - 17000) / -100).toFixed(1),
+      (Math.floor(window.scrollY - 15000) / -100).toFixed(1),
     );
     let active = null;
 
@@ -66,11 +85,11 @@ function handleScroll() {
 
     // Calculate which article should be visible based on scroll position
     const scrollPosition = window.scrollY;
-    const articleHeight = 1000; // Height of each article section
+    const articleHeight = 800; // Height of each article section
 
     // Find the article that corresponds to the current scroll position
     articles.forEach((article, index) => {
-      const articleStart = 1500 + index * articleHeight;
+      const articleStart = index * articleHeight;
       const articleEnd = articleStart + articleHeight;
 
       if (scrollPosition >= articleStart && scrollPosition < articleEnd) {
@@ -106,12 +125,36 @@ window.onload = () => {
     Math.min(640, Math.floor(window.innerHeight * 0.85)) + 'px',
   );
 
+  // Initialize lastScrollTop
+  window.lastScrollTop = window.scrollY;
+
   handleScroll();
 
   // Add click handler to blank page
   const blankPage = document.getElementById('blank-page');
   blankPage.addEventListener('click', async () => {
     try {
+      // Show loading text
+      const loadingText = document.createElement('div');
+      loadingText.id = 'loading-text';
+      loadingText.style.color = 'black';
+      loadingText.style.fontSize = '1em';
+      loadingText.style.fontFamily = 'Courier New, sans-serif';
+      loadingText.style.opacity = '0';
+      loadingText.style.transition = 'opacity 0.5s ease';
+      loadingText.textContent =
+        'I started to think that I wanted to fly away...';
+      loadingText.style.position = 'fixed';
+      loadingText.style.top = '70%';
+      loadingText.style.left = '50%';
+      loadingText.style.transform = 'translate(-50%, -50%)';
+      blankPage.appendChild(loadingText);
+
+      // Fade in loading text
+      setTimeout(() => {
+        loadingText.style.opacity = '1';
+      }, 100);
+
       // Request both audio and video permissions
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
@@ -130,7 +173,7 @@ window.onload = () => {
       audioElement.addEventListener('error', (e) => {
         console.error('Audio loading error:', e);
         // Continue without audio if it fails to load
-        createAndShowForm();
+        fadeOutLoadingText(createAndShowForm);
       });
 
       audioElement.addEventListener('canplaythrough', () => {
@@ -156,8 +199,19 @@ window.onload = () => {
           .play()
           .catch((e) => console.error('Audio playback error:', e));
 
-        createAndShowForm();
+        setTimeout(() => {
+          fadeOutLoadingText(createAndShowForm);
+        }, 3000);
       });
+
+      // Function to fade out loading text and call callback
+      function fadeOutLoadingText(callback) {
+        loadingText.style.opacity = '0';
+        setTimeout(() => {
+          loadingText.remove();
+          callback();
+        }, 500);
+      }
 
       // Function to create and show the form
       function createAndShowForm() {
@@ -219,7 +273,7 @@ window.onload = () => {
             form.remove();
             const main = createMainSection();
             document.body.appendChild(main);
-            main.style.display = 'block';
+            main.style.display = 'flex';
           }, 800); // Match this duration with the CSS transition duration
         });
 
