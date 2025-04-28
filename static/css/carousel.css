@@ -35,13 +35,13 @@ body {
 
 /* Position videos in a cylinder */
 .carousel-item:nth-child(1) {
-  transform: rotateY(0deg) translateZ(400px);
+  transform: rotateY(0deg) translateZ(250px);
 }
 .carousel-item:nth-child(2) {
-  transform: rotateY(120deg) translateZ(400px);
+  transform: rotateY(120deg) translateZ(250px);
 }
 .carousel-item:nth-child(3) {
-  transform: rotateY(240deg) translateZ(400px);
+  transform: rotateY(240deg) translateZ(250px);
 }
 
 @keyframes rotate {

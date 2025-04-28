@@ -1,5 +1,5 @@
 class CaptionSystem {
-  constructor() {
+  constructor(fontSize = '1.2em') {
     this.container = null;
     this.box = null;
     this.text = null;
@@ -11,6 +11,7 @@ class CaptionSystem {
     this.currentWords = [];
     this.currentWordIndex = 0;
     this.wordInterval = null;
+    this.fontSize = fontSize;
 
     this.init();
   }
@@ -31,6 +32,7 @@ class CaptionSystem {
     this.container = document.getElementById('caption-container');
     this.box = document.getElementById('caption-box');
     this.text = document.getElementById('caption-text');
+    this.text.style.fontSize = this.fontSize;
 
     // Load CSS
     const link = document.createElement('link');
@@ -165,5 +167,6 @@ class CaptionSystem {
 }
 
 // Create global instance
+// window.captions = new CaptionSystem('1.5em');
 window.captions = new CaptionSystem();
 console.log('Caption system initialized');

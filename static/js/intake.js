@@ -12,6 +12,11 @@ const nameForm = document.getElementById('nameForm');
 const canvas = document.getElementById('visualization');
 let selectedCount = 0;
 
+const backgroundAudio = new Audio('/static/frames/ocean.wav');
+backgroundAudio.loop = true;
+backgroundAudio.volume = 0.6;
+backgroundAudio.play();
+
 const onLoad = async () => {
   const intro =
     'First we will locate the life processes that match your signature.';
