@@ -79,6 +79,7 @@
   padding: 2em;
   text-align: center;
   flex-direction: row;
+  z-index: 1000;
 }
 
 .name-form.visible {

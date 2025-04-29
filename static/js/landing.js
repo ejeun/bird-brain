@@ -70,6 +70,13 @@ document.addEventListener('click', () => {
     backgroundAudio
       .play()
       .catch((e) => console.error('Background audio playback failed:', e));
+    // Request mic permissions
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        console.log('Mic permissions granted');
+      })
+      .catch((e) => console.error('Mic permissions request failed:', e));
   }
 });
 
@@ -99,8 +106,7 @@ portal.addEventListener('click', () => {
     clearInterval(checkInterval);
     portal.style.cursor = 'pointer';
     portal.style.animation = 'pulseGlowRed 0.5s infinite alternate ease-in-out';
-    window.captions.show('Please keep still and do not move.');
-    window.captions.show('You may hear a loud noise.');
+    window.captions.show('You may hear a loud noise. Please keep still.');
   }
   if (clicks === 4) {
     if (window.captions.waitingForClick) {

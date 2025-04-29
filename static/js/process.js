@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const loadCall = () => {
+  backgroundAudio.volume = 0.5;
   const call = new Audio('/static/media/call.wav');
   call.play();
   const visualizer = new AudioVisualizer();
