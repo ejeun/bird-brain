@@ -1,7 +1,7 @@
 import { LINES } from './constants.js';
 import { AudioVisualizer } from './utils/visualizer.js';
 
-const backgroundAudio = new Audio('/media/scan.wav');
+const backgroundAudio = new Audio('/static/media/scan.wav');
 backgroundAudio.loop = true;
 backgroundAudio.play();
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const loadCall = () => {
-  const call = new Audio('/media/call.wav');
+  const call = new Audio('/static/media/call.wav');
   call.play();
   const visualizer = new AudioVisualizer();
   visualizer.start();

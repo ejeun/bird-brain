@@ -13,7 +13,7 @@ const nameForm = document.getElementById('nameForm');
 const canvas = document.getElementById('visualization');
 let selectedCount = 0;
 
-const backgroundAudio = new Audio('/media/ocean.wav');
+const backgroundAudio = new Audio('/static/media/ocean.wav');
 backgroundAudio.loop = true;
 backgroundAudio.volume = 0.6;
 backgroundAudio.play();
