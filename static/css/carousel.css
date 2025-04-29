@@ -4,7 +4,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1a1a1a;
   perspective: 1000px;
   overflow: hidden;
 }
@@ -51,31 +50,4 @@ body {
   to {
     transform: rotateY(360deg);
   }
-}
-
-/* Pause animation on hover */
-.carousel-container:hover {
-  animation-play-state: paused;
-}
-
-/* Controls */
-.controls {
-  position: fixed;
-  bottom: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.control-btn {
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
 }

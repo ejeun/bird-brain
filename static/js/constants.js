@@ -9,10 +9,11 @@ export const LINES = [
   'Touch the images that spark the most curiosity in you.',
   'Next, please enter your legal name. You may re-use your existing name.',
   'Thanks [name].',
-  'You\'ve opted into the alpha release and we will be using the flight trajectories of these birds.',
+  'You\'ve opted into the alpha release.',
+  'We will be using the flight trajectories of these birds.',
   'Standard process is letting the mycelium work with your remains.',
-  'The interactions model the sparks between the neurons.',
-  '[name], decide which one your intuition says is yours.',
+  'The interactions model the sparks between the neurons, but research shows migration patterns may be an improvement.',
+  '[name], which one does your intuition say is yours?',
   'Please call back to them.',
   'Breathe in, breathe out (malayalam buddhism meditation exercise)',
   'Eat the honey from the bees to moderate your state.',
@@ -37,38 +38,31 @@ export const POETRY = [
   '"knowledge hadn\'t permeated through the rest of the body yet"',
 ];
 
-// Image data for the collage
+// Define collage images
 export const COLLAGE_IMAGES = [
-  {
-    src: '/static/images/collage/1.jpg',
-    width: '400px',
-    top: '5%',
-    left: '5%',
-  },
-  {
-    src: '/static/images/collage/2.jpg',
-    width: '400px',
-    top: '60%',
-    left: '65%',
-  },
-  {
-    src: '/static/images/collage/3.jpg',
-    width: '400px',
-    top: '50%',
-    left: '2%',
-  },
-  {
-    src: '/static/images/collage/4.jpg',
-    width: '400px',
-    top: '10%',
-    left: '60%',
-  },
-  {
-    src: '/static/images/collage/6.jpg',
-    width: '400px',
-    top: '45%',
-    left: '45%',
-  },
+  { src: '/static/images/corpse.jpg', width: '600px' },
+  { src: '/static/images/worm.jpg', width: '600px' },
+  { src: '/static/images/clock.webp', width: '600px' },
+  { src: '/static/images/lighter.jpg', width: '600px' },
+  { src: '/static/images/tree.jpg', width: '600px' },
+  { src: '/static/images/abstract.jpg', width: '600px' },
+  { src: '/static/images/sparkle.jpg', width: '600px' },
+  { src: '/static/images/sheep.jpg', width: '600px' },
+  { src: '/static/images/crab.jpg', width: '600px' },
+  { src: '/static/images/egg.jpg', width: '600px' },
+  { src: '/static/images/platypus.jpg', width: '600px' },
+  { src: '/static/images/lightning.jpg', width: '600px' },
+  { src: '/static/images/bat.jpg', width: '600px' },
+  { src: '/static/images/mushroom.jpg', width: '600px' },
+  { src: '/static/images/water.jpg', width: '600px' },
+  { src: '/static/images/color.jpg', width: '600px' },
+  { src: '/static/images/micro.jpg', width: '600px' },
+  { src: '/static/images/retrograde.jpg', width: '600px' },
+  { src: '/static/images/hummingbird.jpg', width: '600px' },
+  { src: '/static/images/calf.jpg', width: '600px' },
+  { src: '/static/images/fungi.jpg', width: '600px' },
+  { src: '/static/images/dog.jpg', width: '600px' },
+  { src: '/static/images/dune.jpg', width: '600px' },
 ];
 
 // Animation timing constants

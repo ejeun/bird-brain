@@ -4,10 +4,10 @@ const portal = document.querySelector('.portal');
 const overlay = document.querySelector('.overlay');
 
 // Initialize audio elements
-const backgroundAudio = new Audio('/static/frames/background.mp3');
+const backgroundAudio = new Audio('/media/background.mp3');
 backgroundAudio.loop = true;
-backgroundAudio.volume = 0.6;
-const portalAudio = new Audio('/static/frames/portal.wav');
+backgroundAudio.volume = 0.9;
+const portalAudio = new Audio('/media/portal.wav');
 portalAudio.volume = 0.5;
 
 // Initialize Web Audio API context and nodes for shuffle sound
@@ -18,7 +18,7 @@ const shuffleGain = audioContext.createGain();
 shuffleGain.gain.value = 3.0; // Set gain to 2.0 (200% volume)
 shuffleGain.connect(audioContext.destination);
 
-fetch('/static/frames/shuffle.wav')
+fetch('/media/shuffle.wav')
   .then((response) => response.arrayBuffer())
   .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
   .then((audioBuffer) => {

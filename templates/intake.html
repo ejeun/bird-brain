@@ -1,14 +1,28 @@
-{% extends "components/stepbase.html" %}
-{% block content %}
-    <link rel="stylesheet" href="/static/css/intake.css">
-    <script type="module" src="/static/js/intake.js" defer></script>
+{% extends "components/stepbase.html" %} {% block content %}
+<link rel="stylesheet" href="/static/css/intake.css" />
+<script type="module" src="/static/js/intake.js" defer></script>
 
-    <div class="container">
-        <canvas id="visualization"></canvas>
-        <div class="collage-container inactive" id="collage"></div>
-        <form class="name-form" id="nameForm">
-            <input type="text" id="nameInput" placeholder="Your next name" required>
-            <button type="submit">Accept</button>
-        </form>
-    </div>
-{% endblock %}
+<div class="container">
+  <canvas id="visualization"></canvas>
+  <div class="collage-container inactive" id="collage">
+    <main>
+      <article class="one"></article>
+      <article class="two"></article>
+      <article class="three"></article>
+      <article class="four"></article>
+      <article class="five"></article>
+      <article class="six"></article>
+      <article class="seven"></article>
+      <article class="eight"></article>
+      <article class="nine"></article>
+      <article class="ten"></article>
+      <article class="eleven"></article>
+      <article class="twelve"></article>
+    </main>
+    <form class="name-form" id="nameForm">
+      <input type="text" id="nameInput" placeholder="Your next name" required />
+      <button type="submit">Accept</button>
+    </form>
+  </div>
+  {% endblock %}
+</div>

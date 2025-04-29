@@ -1,51 +1,25 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>process</title>
-    <link rel="stylesheet" href="/static/css/carousel.css" />
-  </head>
-  <body>
-    <div class="carousel-container">
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/videos/video1.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/videos/video2.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/videos/video3.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
-
-    <script>
-      let isRotating = true;
-      const carousel = document.querySelector('.carousel-container');
-
-      // Handle visibility change
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          carousel.style.animationPlayState = 'paused';
-        } else {
-          carousel.style.animationPlayState = isRotating ? 'running' : 'paused';
-        }
-      });
-
-      //       "[name], decide which one your intuition says is yours.",
-      //   "Please call back to them.",
-      //   "Breathe in, breathe out (malayalam buddhism meditation exercise)",
-      //   "Eat the honey from the bees to moderate your state.",
-      //   "This current state has been saved.",
-      //   "We have targeted this flock and blown them 0.3 degrees southeast",
-      //   "Other adjustments to the ecosystem include an increase of soil acidity by 0.03% and diversifying the bacteria in their resting grounds.",
-      //   "Their state is now equivalent to yours.",
-    </script>
-  </body>
-</html>
+{% extends "components/stepbase.html" %} {% block content %}
+<script
+  type="text/javascript"
+  src="https://unpkg.com/meyda@5.6.3/dist/web/meyda.min.js"
+></script>
+<link rel="stylesheet" href="/static/css/carousel.css" />
+<div class="carousel-container">
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video1.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video3.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video2.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+<script type="module" src="/static/js/process.js"></script>
+{% endblock %}

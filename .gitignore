@@ -11,6 +11,7 @@ instance/
 *.sqlite3
 
 node_modules/
+static/media/
 
 # Frontend build artifacts
 dist/
