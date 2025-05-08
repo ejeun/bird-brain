@@ -12,6 +12,7 @@ class CaptionSystem {
     this.currentWordIndex = 0;
     this.wordInterval = null;
     this.fontSize = fontSize;
+    this.audioContext = null;
 
     this.init();
   }
@@ -56,6 +57,79 @@ class CaptionSystem {
     }
   }
 
+  async generateMuffledSpeech(text) {
+    if (!this.audioContext) {
+      this.audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+    }
+
+    // Calculate number of sounds based on text length
+    const numSounds = Math.max(3, Math.min(8, Math.floor(text.length / 5)));
+    const baseDuration = Math.min(text.length * 30, 1500); // Shorter base duration for overlap
+
+    // Create multiple overlapping sounds
+    for (let i = 0; i < numSounds; i++) {
+      const oscillator = this.audioContext.createOscillator();
+      const gainNode = this.audioContext.createGain();
+      const filter = this.audioContext.createBiquadFilter();
+
+      // Configure filter for deeper muffled effect
+      filter.type = 'lowpass';
+      filter.frequency.value = 400 + Math.random() * 200; // Lower filter frequency
+      filter.Q.value = 0.8 + Math.random() * 0.4;
+
+      // Configure gain for volume control
+      gainNode.gain.value = 0.05 + Math.random() * 0.05;
+
+      // Connect nodes
+      oscillator.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(this.audioContext.destination);
+
+      // Generate random frequency between 80-200 Hz for deep male voice
+      oscillator.frequency.value = 80 + Math.random() * 120;
+
+      // Add slower frequency modulation for deeper voice
+      const modulator = this.audioContext.createOscillator();
+      const modGain = this.audioContext.createGain();
+      modulator.frequency.value = 3 + Math.random() * 3; // Exactly 3-6 Hz modulation
+      modGain.gain.value = 3 + Math.random() * 3; // Less modulation depth for stability
+      modulator.connect(modGain);
+      modGain.connect(oscillator.frequency);
+
+      // Start oscillators with slight delay between each
+      const startDelay = (i * (baseDuration / numSounds)) / 1000;
+      oscillator.start(this.audioContext.currentTime + startDelay);
+      modulator.start(this.audioContext.currentTime + startDelay);
+
+      // Calculate duration with some randomness
+      const duration = baseDuration + (Math.random() * 500 - 250);
+
+      // Create envelope for natural fade
+      gainNode.gain.setValueAtTime(
+        0,
+        this.audioContext.currentTime + startDelay,
+      );
+      gainNode.gain.linearRampToValueAtTime(
+        gainNode.gain.value,
+        this.audioContext.currentTime + startDelay + 0.1,
+      );
+      gainNode.gain.linearRampToValueAtTime(
+        0,
+        this.audioContext.currentTime + startDelay + duration / 1000,
+      );
+
+      // Stop oscillators after duration
+      setTimeout(
+        () => {
+          oscillator.stop();
+          modulator.stop();
+        },
+        duration + startDelay * 1000,
+      );
+    }
+  }
+
   async processQueue() {
     if (this.queue.length === 0) {
       this.isProcessing = false;
@@ -74,6 +148,9 @@ class CaptionSystem {
       this.processQueue();
       return;
     }
+
+    // Generate muffled speech for the message
+    this.generateMuffledSpeech(message);
 
     // Display caption
     this.box.classList.add('visible');

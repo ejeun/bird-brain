@@ -107,10 +107,12 @@ portal.addEventListener('click', () => {
     portal.style.cursor = 'pointer';
     portal.style.animation = 'pulseGlowRed 0.5s infinite alternate ease-in-out';
     window.captions.show('You may hear a loud noise. Please keep still.');
-    window.captions.show('Let\'s dissolve you.');
-    overlay.classList.add('fade-out');
     setTimeout(() => {
-      window.location.href = '/intake';
+      window.captions.show('Let\'s dissolve you.');
+      overlay.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = '/intake';
+      }, 1000);
     }, 5000);
   }
 });

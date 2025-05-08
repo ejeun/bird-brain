@@ -36,6 +36,7 @@ const loadCall = () => {
   visualizer.start();
   setTimeout(() => {
     window.captions.show('Please return in 180 days for the next step.');
+    window.captions.show('Meanwhile we will begin calibrating your next body.');
     // Fade out the visualizer
     visualizer.stop();
     // redirect to the landing page
