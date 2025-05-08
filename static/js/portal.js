@@ -29,7 +29,7 @@ for (let i = 0; i < particleCount; i++) {
 
 // Animation loop
 function animate() {
-  ctx.fillStyle = 'rgba(51, 51, 51, 0.1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   particles.forEach((particle) => {
