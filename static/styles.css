@@ -1,3 +1,7 @@
+h2 {
+  font-family: 'Silkscreen', cursive;
+}
+
 .terminal {
   color: #00f7ff; /* Electric blue */
   user-select: none;
@@ -191,7 +195,7 @@ a:hover {
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s ease;
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Ubuntu Mono', monospace;
 }
 
 .log-toggle:hover {

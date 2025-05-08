@@ -20,7 +20,20 @@ async function startTypewriter() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', startTypewriter);
+document.addEventListener('DOMContentLoaded', () => {
+  // Check if this is the first visit
+  if (!localStorage.getItem('hasVisited')) {
+    startTypewriter();
+    localStorage.setItem('hasVisited', 'true');
+  } else {
+    // If not first visit, just show the text immediately
+    const elements = document.querySelectorAll('.typewriter');
+    elements.forEach((element, i) => {
+      element.textContent = loadingTexts[i];
+      element.classList.add('visible');
+    });
+  }
+});
 
 // function drawPortal() {
 //   ctx.clearRect(0, 0, canvas.width, canvas.height);

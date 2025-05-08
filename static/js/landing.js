@@ -76,7 +76,11 @@ document.addEventListener('click', () => {
       .then((stream) => {
         console.log('Mic permissions granted');
       })
-      .catch((e) => console.error('Mic permissions request failed:', e));
+      .catch((e) => {
+        console.error('Mic permissions request failed:', e);
+        // give alert
+        alert('Mic permissions request failed. Please enable for site.');
+      });
   }
 });
 
