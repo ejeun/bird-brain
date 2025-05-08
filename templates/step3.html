@@ -1,155 +1,157 @@
-{% extends "components/stepbase.html" %}
-{% block content %}
-<link rel="stylesheet" href="/static/css/birdcall.css">
+{% extends "components/stepbase.html" %} {% block content %}
+<link rel="stylesheet" href="/static/css/birdcall.css" />
 
 <div class="visualizer-container">
-    <canvas id="visualizer"></canvas>
+  <canvas id="visualizer"></canvas>
 </div>
 
 <script defer>
-    const lines = [
-        "Standard process is letting the mycelium work with your remains.",
-        "The interactions model the sparks between the neurons.",
-        "You've opted into the alpha release and we will be using the flight trajectories of these birds.",
-        "Decide which one your intuition says is yours.",
-        "Please call back to them.",
-        "Breathe in, breathe out (malayalam buddhism meditation exercise)",
-        "Eat the honey from the bees to moderate your state.",
-        "This current state has been saved.",
-        "We have targeted this flock and blown them 0.3 degrees southeast",
-        "Other adjustments to the ecosystem include an increase of soil acidity by 0.03% and diversifying the bacteria in their resting grounds.",
-        "Their state is now equivalent to yours.",
-        "[name] will live on at [latlong (link to the google maps view)].",
-        "The sun is rising. Exit the machine",
-        "Subscribe to see how [] solves new problems.",
-    ];
+  const lines = [
+    'Standard process is letting the mycelium work with your remains.',
+    'The interactions model the sparks between the neurons.',
+    "You've opted into the alpha release and we will be using the flight trajectories of these birds.",
+    'Decide which one your intuition says is yours.',
+    'Please call back to them.',
+    'Breathe in, breathe out (malayalam buddhism meditation exercise)',
+    'Eat the honey from the bees to moderate your state.',
+    'This current state has been saved.',
+    'We have targeted this flock and blown them 0.3 degrees southeast',
+    'Other adjustments to the ecosystem include an increase of soil acidity by 0.03% and diversifying the bacteria in their resting grounds.',
+    'Their state is now equivalent to yours.',
+    '[name] will live on at [latlong (link to the google maps view)].',
+    'The sun is rising. Exit the machine',
+    'Subscribe to see how [] solves new problems.',
+  ];
 
-    class AudioVisualizer {
-        constructor() {
-            this.canvas = document.getElementById('visualizer');
-            this.ctx = this.canvas.getContext('2d');
-            this.audioContext = null;
-            this.analyser = null;
-            this.dataArray = null;
-            this.isRecording = false;
-            this.animationFrame = null;
-            
-            this.setupCanvas();
-            this.setupEventListeners();
-        }
+  class AudioVisualizer {
+    constructor() {
+      this.canvas = document.getElementById('visualizer');
+      this.ctx = this.canvas.getContext('2d');
+      this.audioContext = null;
+      this.analyser = null;
+      this.dataArray = null;
+      this.isRecording = false;
+      this.animationFrame = null;
 
-        setupCanvas() {
-            const dpr = window.devicePixelRatio || 1;
-            const rect = this.canvas.getBoundingClientRect();
-            
-            this.canvas.width = rect.width * dpr;
-            this.canvas.height = rect.height * dpr;
-            this.ctx.scale(dpr, dpr);
-            
-            this.centerX = rect.width / 2;
-            this.centerY = rect.height / 2;
-        }
-
-        async setupAudio() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const source = this.audioContext.createMediaStreamSource(stream);
-                this.analyser = this.audioContext.createAnalyser();
-                
-                this.analyser.fftSize = 256;
-                source.connect(this.analyser);
-                this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
-                
-                this.startVisualization();
-            } catch (err) {
-                console.error('Error accessing microphone:', err);
-                window.captions.show("Please enable microphone access to continue");
-            }
-        }
-
-        startVisualization() {
-            const draw = () => {
-                this.animationFrame = requestAnimationFrame(draw);
-                this.analyser.getByteFrequencyData(this.dataArray);
-                this.drawVisualizer();
-            };
-            draw();
-        }
-
-        drawVisualizer() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            
-            const radius = 100;
-            const bars = 180;
-            const step = (Math.PI * 2) / bars;
-
-            this.ctx.beginPath();
-            this.ctx.arc(this.centerX, this.centerY, radius - 50, 0, Math.PI * 2);
-            this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-            this.ctx.stroke();
-
-            for (let i = 0; i < bars; i++) {
-                const value = this.dataArray[i] || 0;
-                const barHeight = value * 0.5;
-                const angle = step * i;
-                
-                const x1 = this.centerX + Math.cos(angle) * radius;
-                const y1 = this.centerY + Math.sin(angle) * radius;
-                const x2 = this.centerX + Math.cos(angle) * (radius + barHeight);
-                const y2 = this.centerY + Math.sin(angle) * (radius + barHeight);
-                
-                this.ctx.beginPath();
-                this.ctx.moveTo(x1, y1);
-                this.ctx.lineTo(x2, y2);
-                this.ctx.strokeStyle = `hsla(${value}, 50%, 50%, 0.8)`;
-                this.ctx.lineWidth = 2;
-                this.ctx.stroke();
-            }
-        }
-
-        setupEventListeners() {
-            const micButton = document.getElementById('micButton');
-            micButton.addEventListener('click', () => {
-                if (!this.isRecording) {
-                    this.setupAudio();
-                    micButton.classList.add('recording');
-                    micButton.textContent = 'Recording...';
-                    this.isRecording = true;
-                } else {
-                    if (this.audioContext) {
-                        this.audioContext.close();
-                    }
-                    cancelAnimationFrame(this.animationFrame);
-                    micButton.classList.remove('recording');
-                    micButton.textContent = 'Start Recording';
-                    this.isRecording = false;
-                }
-            });
-        }
+      this.setupCanvas();
+      this.setupEventListeners();
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const visualizer = new AudioVisualizer();
-        
-        // Show captions in sequence
-        let currentLine = 0;
-        function showNextLine() {
-            if (currentLine < lines.length) {
-                window.captions.show(lines[currentLine]);
-                currentLine++;
-            }
+    setupCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = this.canvas.getBoundingClientRect();
+
+      this.canvas.width = rect.width * dpr;
+      this.canvas.height = rect.height * dpr;
+      this.ctx.scale(dpr, dpr);
+
+      this.centerX = rect.width / 2;
+      this.centerY = rect.height / 2;
+    }
+
+    async setupAudio() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        this.audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const source = this.audioContext.createMediaStreamSource(stream);
+        this.analyser = this.audioContext.createAnalyser();
+
+        this.analyser.fftSize = 256;
+        source.connect(this.analyser);
+        this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+
+        this.startVisualization();
+      } catch (err) {
+        console.error('Error accessing microphone:', err);
+        window.captions.show('Please enable microphone access to continue');
+      }
+    }
+
+    startVisualization() {
+      const draw = () => {
+        this.animationFrame = requestAnimationFrame(draw);
+        this.analyser.getByteFrequencyData(this.dataArray);
+        this.drawVisualizer();
+      };
+      draw();
+    }
+
+    drawVisualizer() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      const radius = 100;
+      const bars = 180;
+      const step = (Math.PI * 2) / bars;
+
+      this.ctx.beginPath();
+      this.ctx.arc(this.centerX, this.centerY, radius - 50, 0, Math.PI * 2);
+      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      this.ctx.stroke();
+
+      for (let i = 0; i < bars; i++) {
+        const value = this.dataArray[i] || 0;
+        const barHeight = value * 0.5;
+        const angle = step * i;
+
+        const x1 = this.centerX + Math.cos(angle) * radius;
+        const y1 = this.centerY + Math.sin(angle) * radius;
+        const x2 = this.centerX + Math.cos(angle) * (radius + barHeight);
+        const y2 = this.centerY + Math.sin(angle) * (radius + barHeight);
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
+        this.ctx.strokeStyle = `hsla(${value}, 50%, 50%, 0.8)`;
+        this.ctx.lineWidth = 2;
+        this.ctx.stroke();
+      }
+    }
+
+    setupEventListeners() {
+      const micButton = document.getElementById('micButton');
+      micButton.addEventListener('click', () => {
+        if (!this.isRecording) {
+          this.setupAudio();
+          micButton.classList.add('recording');
+          micButton.textContent = 'Recording...';
+          this.isRecording = true;
+        } else {
+          if (this.audioContext) {
+            this.audioContext.close();
+          }
+          cancelAnimationFrame(this.animationFrame);
+          micButton.classList.remove('recording');
+          micButton.textContent = 'Start Recording';
+          this.isRecording = false;
         }
+      });
+    }
+  }
 
-        // Show first caption
+  document.addEventListener('DOMContentLoaded', () => {
+    const visualizer = new AudioVisualizer();
+
+    // Show captions in sequence
+    let currentLine = 0;
+    function showNextLine() {
+      if (currentLine < lines.length) {
+        window.captions.show(lines[currentLine]);
+        currentLine++;
+      }
+    }
+
+    // Show first caption
+    showNextLine();
+
+    // Show next caption when current one finishes
+    setInterval(() => {
+      if (!window.captions.hasQueuedCaptions()) {
         showNextLine();
-
-        // Show next caption when current one finishes
-        setInterval(() => {
-            if (!window.captions.hasQueuedCaptions()) {
-                showNextLine();
-            }
-        }, 1000);
-    });
+      }
+    }, 1000);
+  });
 </script>
 {% endblock %}

@@ -1,0 +1,290 @@
+.terminal {
+  color: #00f7ff; /* Electric blue */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.terminal a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.terminal a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header {
+  color: #00f7ff;
+}
+
+.status {
+  color: #ff00ff; /* Electric purple */
+}
+
+.console p {
+  color: #00f7ff;
+}
+
+.flicker {
+  color: #ff00ff;
+  animation: flicker 1.5s infinite;
+}
+
+.log {
+  color: #ffbbff;
+  opacity: 0.8;
+}
+
+#enterPortal {
+  color: #ff00ff;
+  border-color: #ff00ff;
+  background: transparent;
+  text-decoration: none;
+}
+
+#enterPortal a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#enterPortal:hover {
+  background: #ff00ff;
+  color: #000;
+}
+
+#enterPortal:hover a {
+  color: inherit;
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.prompt {
+  color: #ff00ff;
+}
+
+#consentInput {
+  background: transparent;
+  border: none;
+  color: #00f7ff;
+  font-family: 'VT323', monospace;
+  font-size: 1em;
+  width: 20px;
+  outline: none;
+  caret-color: #ff00ff;
+}
+
+.hidden-content {
+  display: none;
+}
+
+.consent-message {
+  color: #ff00ff;
+  margin: 20px 0;
+}
+
+@keyframes flicker {
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+  }
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('/static/fonts/Orbitron/Orbitron-VariableFont_wght.ttf')
+    format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  src: url('/static/fonts/Courier_Prime/CourierPrime-Regular.ttf')
+    format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.6;
+  position: relative;
+}
+
+#portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.content {
+  max-width: 600px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: #00f7ff;
+  text-decoration: none;
+  font-family: 'Courier Prime', monospace;
+  font-size: x-large;
+  text-align: center;
+}
+
+a:hover {
+  text-shadow: 0 0 5px #ffbbff;
+}
+
+.separator {
+  margin: 2em 0;
+  border-top: 1px solid #fff;
+}
+
+.log-toggle {
+  color: #ffbbff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Courier Prime', monospace;
+}
+
+.log-toggle:hover {
+  text-shadow: 0 0 5px #00f7ff;
+}
+
+.hidden {
+  display: none;
+}
+
+#log {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00f7ff;
+  padding: 15px;
+  margin-top: 20px;
+  font-family: 'Courier Prime', monospace;
+  color: #00f7ff;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#log.visible {
+  opacity: 1;
+}
+
+#log::before {
+  content: 'C:\\> ';
+  color: #00f7ff;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+#log p {
+  margin: 0;
+  padding-left: 30px;
+  line-height: 1.4;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+#log p:first-of-type {
+  margin-top: 20px;
+}
+
+#log p:last-of-type {
+  margin-bottom: 20px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+#log::after {
+  content: '_';
+  color: #00f7ff;
+  animation: blink 1s step-end infinite;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.loading {
+  min-height: 120px;
+  position: relative;
+  margin: 2rem 0;
+}
+
+.loading p {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loading p.visible {
+  opacity: 1;
+}
+
+.loading p:nth-child(1) {
+  top: 0;
+}
+.loading p:nth-child(2) {
+  top: 40px;
+}
+.loading p:nth-child(3) {
+  top: 80px;
+}

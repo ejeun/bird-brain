@@ -1,7 +1,6 @@
 import { DataVisualizer } from './utils/dataviz.js';
 import {
   LINES,
-  POETRY,
   COLLAGE_IMAGES,
   ANIMATION_TIMING,
   CANVAS_CONFIG,
@@ -12,6 +11,67 @@ const collage = document.getElementById('collage');
 const nameForm = document.getElementById('nameForm');
 const canvas = document.getElementById('visualization');
 let selectedCount = 0;
+
+// Create virtual keyboard
+const createVirtualKeyboard = () => {
+  const keyboard = document.createElement('div');
+  keyboard.className = 'virtual-keyboard';
+
+  const keys = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+    '⌫',
+    '↵',
+  ];
+
+  keys.forEach((key) => {
+    const keyButton = document.createElement('button');
+    keyButton.textContent = key;
+
+    keyButton.addEventListener('click', () => {
+      const nameInput = document.getElementById('nameInput');
+      if (key === '⌫') {
+        nameInput.value = nameInput.value.slice(0, -1);
+      } else if (key === '↵') {
+        if (nameInput.value.length > 0) {
+          nameForm.dispatchEvent(new Event('submit'));
+        }
+      } else {
+        if (nameInput.value.length < 20) {
+          nameInput.value += key;
+        }
+      }
+    });
+
+    keyboard.appendChild(keyButton);
+  });
+
+  return keyboard;
+};
 
 const backgroundAudio = new Audio('/static/media/ocean.wav');
 backgroundAudio.loop = true;
@@ -143,7 +203,6 @@ articles.forEach((articleClass, index) => {
     const onImageClick = () => {
       if (!image.classList.contains('selected') && selectedCount < 3) {
         image.classList.add('selected');
-        selectedCount++;
       }
       if (selectedCount === 3) {
         // Add a class to the collage container to disable hover effects
@@ -160,6 +219,7 @@ articles.forEach((articleClass, index) => {
           nameForm.classList.add('visible');
         }, ANIMATION_TIMING.FORM_DELAY);
       }
+      selectedCount++;
     };
     image.addEventListener('click', onImageClick);
   }
@@ -168,11 +228,35 @@ articles.forEach((articleClass, index) => {
 // Handle name submission
 nameForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const name = document.getElementById('nameInput').value;
+  const name = document.getElementById('nameInput').value.trim();
+
+  // Validate name input
+  if (!name) {
+    // Add visual feedback for empty input
+    const nameInput = document.getElementById('nameInput');
+    nameInput.style.borderColor = 'red';
+    nameInput.style.animation = 'shake 0.5s';
+
+    // Remove animation after it completes
+    setTimeout(() => {
+      nameInput.style.animation = '';
+      nameInput.style.borderColor = '';
+    }, 500);
+
+    return;
+  }
+
   const collage = document.getElementById('collage');
+  const keyboard = document.querySelector('.virtual-keyboard');
 
   // Save name to localStorage
   localStorage.setItem('userName', name);
+
+  // Remove keyboard
+  if (keyboard) {
+    keyboard.style.opacity = '0';
+    setTimeout(() => keyboard.remove(), 500);
+  }
 
   setTimeout(() => {
     nameForm.classList.remove('visible');
@@ -197,6 +281,20 @@ nameForm.addEventListener('submit', (e) => {
     window.location.href = '/process';
   }, 5000);
 });
+
+// Show keyboard when name form becomes visible
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.target.classList.contains('visible')) {
+      const keyboard = createVirtualKeyboard();
+      document.body.appendChild(keyboard);
+      // Disable physical keyboard input
+      document.getElementById('nameInput').readOnly = true;
+    }
+  });
+});
+
+observer.observe(nameForm, { attributes: true });
 
 window.onload = () => {
   const root = document.querySelector(':root');

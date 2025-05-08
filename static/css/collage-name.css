@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Ubuntu Mono';
-  src: url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap')
-    format('woff2');
+  src: url('/static/fonts/Ubuntu_Sans_Mono/UbuntuSansMono-VariableFont_wght.ttf')
+    format('truetype');
   font-weight: normal;
   font-style: normal;
 }

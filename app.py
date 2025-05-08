@@ -23,6 +23,11 @@ def view3():
     return render_template("sandpiper.html")
 
 
+@app.route("/consent")
+def consent():
+    return render_template("consent.html")
+
+
 @app.route("/process")
 def process():
     return render_template("process.html")
@@ -39,6 +44,11 @@ def step4():
 
 
 @app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/landing")
 def landing():
     return render_template("landing.html")
 

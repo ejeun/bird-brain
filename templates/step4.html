@@ -1,130 +1,137 @@
-{% extends "components/stepbase.html" %}
-{% block content %}
-<link rel="stylesheet" href="/static/css/meditation.css">
-
-<div class="breath-container">
-    <div class="breath-circle">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step 4</title>
+    <link rel="icon" type="image/x-icon" href="/static/media/favicon.ico" />
+    <link rel="stylesheet" href="/static/css/meditation.css" />
+  </head>
+  <body>
+    <div class="breath-container">
+      <div class="breath-circle">
         <div class="breath-indicator"></div>
         <div class="breath-rings"></div>
+      </div>
     </div>
-</div>
 
-<script defer>
-    const lines = [
-        "Breathe in, breathe out (malayalam buddhism meditation exercise)",
-        "Eat the honey from the bees to moderate your state.",
-        "This current state has been saved.",
-        "We have targeted this flock and blown them 0.3 degrees southeast",
-        "Other adjustments to the ecosystem include an increase of soil acidity by 0.03% and diversifying the bacteria in their resting grounds.",
-        "Their state is now equivalent to yours.",
-        "[name] will live on at [latlong (link to the google maps view)].",
-        "The sun is rising. Exit the machine",
-        "Subscribe to see how [] solves new problems.",
-    ];
+    <script defer>
+      const lines = [
+        'Breathe in, breathe out (malayalam buddhism meditation exercise)',
+        'Eat the honey from the bees to moderate your state.',
+        'This current state has been saved.',
+        'We have targeted this flock and blown them 0.3 degrees southeast',
+        'Other adjustments to the ecosystem include an increase of soil acidity by 0.03% and diversifying the bacteria in their resting grounds.',
+        'Their state is now equivalent to yours.',
+        '[name] will live on at [latlong (link to the google maps view)].',
+        'The sun is rising. Exit the machine',
+        'Subscribe to see how [] solves new problems.',
+      ];
 
-    class BreathingGuide {
+      class BreathingGuide {
         constructor() {
-            this.breathText = document.getElementById('breathText');
-            this.currentPhase = 'inhale';
-            this.cycles = 0;
-            this.maxCycles = 3; // Number of breath cycles before moving on
+          this.breathText = document.getElementById('breathText');
+          this.currentPhase = 'inhale';
+          this.cycles = 0;
+          this.maxCycles = 3; // Number of breath cycles before moving on
         }
 
         start() {
-            this.breathingCycle();
+          this.breathingCycle();
         }
 
         async breathingCycle() {
-            if (this.cycles >= this.maxCycles) {
-                this.showNextCaption();
-                return;
-            }
+          if (this.cycles >= this.maxCycles) {
+            this.showNextCaption();
+            return;
+          }
 
-            // Inhale phase
-            this.breathText.style.opacity = '1';
-            await this.wait(4000);
+          // Inhale phase
+          this.breathText.style.opacity = '1';
+          await this.wait(4000);
 
-            // Hold phase
-            await this.wait(2000);
+          // Hold phase
+          await this.wait(2000);
 
-            // Exhale phase
-            await this.wait(4000);
+          // Exhale phase
+          await this.wait(4000);
 
-            // Rest phase
-            await this.wait(2000);
+          // Rest phase
+          await this.wait(2000);
 
-            this.cycles++;
-            this.breathingCycle();
+          this.cycles++;
+          this.breathingCycle();
         }
 
         wait(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+          return new Promise((resolve) => setTimeout(resolve, ms));
         }
 
         showNextCaption() {
-            let currentIndex = 1; // Start from second caption
-            
-            const showNext = () => {
-                if (currentIndex < lines.length) {
-                    window.captions.show(lines[currentIndex]);
-                    currentIndex++;
-                }
-            };
+          let currentIndex = 1; // Start from second caption
 
-            // Show next caption when current one finishes
-            const interval = setInterval(() => {
-                if (!window.captions.hasQueuedCaptions()) {
-                    showNext();
-                }
-                if (currentIndex >= lines.length) {
-                    clearInterval(interval);
-                }
-            }, 1000);
+          const showNext = () => {
+            if (currentIndex < lines.length) {
+              window.captions.show(lines[currentIndex]);
+              currentIndex++;
+            }
+          };
+
+          // Show next caption when current one finishes
+          const interval = setInterval(() => {
+            if (!window.captions.hasQueuedCaptions()) {
+              showNext();
+            }
+            if (currentIndex >= lines.length) {
+              clearInterval(interval);
+            }
+          }, 1000);
         }
-    }
+      }
 
-    document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener('DOMContentLoaded', () => {
         // Show first caption
         window.captions.show(lines[0]);
-    });
+      });
 
-    const breathingGuide = new BreathingGuide();
-    breathingGuide.start();
+      const breathingGuide = new BreathingGuide();
+      breathingGuide.start();
 
-    // After we have gotten to the last caption...
-    window.captions.show(lines[1]);
+      // After we have gotten to the last caption...
+      window.captions.show(lines[1]);
 
-    // Remove the breathing guide
-    const breathContainer = document.querySelector('.breath-container');
-    if (breathContainer) {
+      // Remove the breathing guide
+      const breathContainer = document.querySelector('.breath-container');
+      if (breathContainer) {
         breathContainer.remove();
-    }  
+      }
 
-    // Show a pool of honey that the user must mouseover to make disappear
-    const honeyPool = document.querySelector('.honey-pool');
-    if (honeyPool) {
+      // Show a pool of honey that the user must mouseover to make disappear
+      const honeyPool = document.querySelector('.honey-pool');
+      if (honeyPool) {
         honeyPool.style.display = 'block';
-    }   
+      }
 
-    // Add an event listener to the honey pool
-    honeyPool.addEventListener('mouseover', () => {
+      // Add an event listener to the honey pool
+      honeyPool.addEventListener('mouseover', () => {
         // Make parts of the pool fade in opacity.
-    });
+      });
 
-    // When it's gone, remove the honey pool
-    honeyPool.addEventListener('animationend', () => {
+      // When it's gone, remove the honey pool
+      honeyPool.addEventListener('animationend', () => {
         honeyPool.remove();
-    }); 
+      });
 
-    // Begin showing a idealistic sunrise view with changing colors
-        const sunrise = document.querySelector('.sunrise');
-    if (sunrise) {
+      // Begin showing a idealistic sunrise view with changing colors
+      const sunrise = document.querySelector('.sunrise');
+      if (sunrise) {
         sunrise.style.display = 'block';
-    }
+      }
 
-    // Add an event listener to the sunrise
-    sunrise.addEventListener('animationend', () => {
+      // Add an event listener to the sunrise
+      sunrise.addEventListener('animationend', () => {
         sunrise.remove();
-    });
-</script>
-{% endblock %}
+      });
+    </script>
+  </body>
+</html>

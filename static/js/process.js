@@ -34,4 +34,13 @@ const loadCall = () => {
   call.play();
   const visualizer = new AudioVisualizer();
   visualizer.start();
+  setTimeout(() => {
+    window.captions.show('Please return in 180 days for the next step.');
+    // Fade out the visualizer
+    visualizer.stop();
+    // redirect to the landing page
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 10000);
+  }, 10000);
 };

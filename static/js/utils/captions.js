@@ -65,6 +65,16 @@ class CaptionSystem {
     this.isProcessing = true;
     const { message, teleprompterMode } = this.queue.shift();
 
+    // Skip display for empty messages but maintain pause
+    if (!message || message.trim() === '') {
+      await new Promise((resolve) => {
+        this.currentResolve = resolve;
+        setTimeout(resolve, 3000);
+      });
+      this.processQueue();
+      return;
+    }
+
     // Display caption
     this.box.classList.add('visible');
 

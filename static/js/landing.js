@@ -6,7 +6,7 @@ const overlay = document.querySelector('.overlay');
 // Initialize audio elements
 const backgroundAudio = new Audio('/static/media/background.mp3');
 backgroundAudio.loop = true;
-backgroundAudio.volume = 0.9;
+backgroundAudio.volume = 1.0;
 const portalAudio = new Audio('/static/media/portal.wav');
 portalAudio.volume = 0.5;
 
@@ -107,16 +107,11 @@ portal.addEventListener('click', () => {
     portal.style.cursor = 'pointer';
     portal.style.animation = 'pulseGlowRed 0.5s infinite alternate ease-in-out';
     window.captions.show('You may hear a loud noise. Please keep still.');
-  }
-  if (clicks === 4) {
-    if (window.captions.waitingForClick) {
-      window.captions.next();
-    }
     window.captions.show('Let\'s dissolve you.');
     overlay.classList.add('fade-out');
     setTimeout(() => {
       window.location.href = '/intake';
-    }, 3000);
+    }, 5000);
   }
 });
 

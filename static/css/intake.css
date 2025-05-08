@@ -32,3 +32,59 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.virtual-keyboard {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px rgba(173, 23, 255, 0.3);
+  width: 600px;
+}
+
+.virtual-keyboard button {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--accent);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-shadow: 0 0 10px var(--accent);
+  box-shadow: 0 0 10px rgba(173, 23, 255, 0.2);
+}
+
+.virtual-keyboard button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(173, 23, 255, 0.4);
+  transform: scale(1.05);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+#nameInput {
+  transition: border-color 0.3s ease;
+}

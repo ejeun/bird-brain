@@ -1,12 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>Keki Inc.</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DECOMPOSITOR // Protocol</title>
+    <link rel="icon" type="image/x-icon" href="/static/universe.png" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <canvas id="portal"></canvas>
+    <div class="content">
+      <h2>KEKI INTERNATIONAL</h2>
+      <h1>DECOMPOSITOR v0.2</h1>
+
+      <div class="separator"></div>
+
+      <div class="loading">
+        <p class="typewriter"> </p>
+        <p class="typewriter"> </p>
+        <p class="typewriter"> </p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </p>
+      </div>
+
+      <div class="separator"></div>
+
+      <div class="links">
+        <p><a href="/consent">[ &nbsp;CONSENT&nbsp;&nbsp;&nbsp; FORM&nbsp; ]</a></p>
+        <p><a href="/landing">[ &nbsp;INITIATE PORTAL&nbsp; ]</a></p>
+      </div>
+
+      <div class="separator"></div>
+
+      <p><span id="toggleLogs" class="log-toggle">[ SYSTEM LOGS ]</span></p>
+      <div id="log" class="hidden">
+        <p>// SYSTEM LOG: Quantum signature detected in host matrix</p>
+        <p>// Fractal pathways mapped successfully</p>
+        <p>// Decomposition chamber primed and ready</p>
+        <p>// Awaiting subject consent for procedure</p>
+      </div>
+    </div>
+    <script src="/static/js/portal.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script>
+      
+    </script>
+  </body>
 </html>
