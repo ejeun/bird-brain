@@ -1,34 +1,25 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Process</title>
-    <link rel="icon" type="image/x-icon" href="/static/universe.png" />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/meyda@5.6.3/dist/web/meyda.min.js"
-    ></script>
-    <link rel="stylesheet" href="/static/css/carousel.css" />
-  </head>
-  <body>
-    <div class="carousel-container">
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/media/video1.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/media/video3.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="carousel-item">
-        <video autoplay muted loop playsinline>
-          <source src="/static/media/video2.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
-    <script type="module" src="/static/js/process.js"></script>
-  </body>
-</html>
+{% extends "components/stepbase.html" %} {% block content %}
+<script
+  type="text/javascript"
+  src="https://unpkg.com/meyda@5.6.3/dist/web/meyda.min.js"
+></script>
+<link rel="stylesheet" href="/static/css/carousel.css" />
+<div class="carousel-container">
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video1.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video3.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="carousel-item">
+    <video autoplay muted loop playsinline>
+      <source src="/static/media/video2.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+<script type="module" src="/static/js/process.js"></script>
+{% endblock %}
