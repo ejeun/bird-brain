@@ -203,6 +203,7 @@ articles.forEach((articleClass, index) => {
     const onImageClick = () => {
       if (!image.classList.contains('selected') && selectedCount < 3) {
         image.classList.add('selected');
+        selectedCount++;
       }
       if (selectedCount === 3) {
         // Add a class to the collage container to disable hover effects
@@ -218,8 +219,8 @@ articles.forEach((articleClass, index) => {
         setTimeout(() => {
           nameForm.classList.add('visible');
         }, ANIMATION_TIMING.FORM_DELAY);
+        selectedCount++;
       }
-      selectedCount++;
     };
     image.addEventListener('click', onImageClick);
   }

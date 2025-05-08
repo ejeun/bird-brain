@@ -80,6 +80,7 @@
   text-align: center;
   flex-direction: row;
   z-index: 1000;
+  transition: opacity 0.5s ease;
 }
 
 .name-form.visible {
